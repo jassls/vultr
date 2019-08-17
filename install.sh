@@ -1,4 +1,4 @@
-#/usr/bin/fish
+#!/usr/bin/bash
 yum -y install fish
 yum -y install unzip
 yum -y install git
