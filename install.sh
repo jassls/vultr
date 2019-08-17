@@ -1,11 +1,31 @@
 #!/usr/bin/bash
 yum -y install fish
+yum -y install vim
 yum -y install unzip
 yum -y install git
 yum -y install netdata
 
-切换当前用户默认Shell
+#切换当前用户默认Shell
 chsh -s /usr/bin/fish
+
+#修改配置文件
+NETDATABIND=`grep "bind to" /etc/netdata/netdata.conf`
+
+
+echo "${NETDATABIND}"
+if [[ $NETDATABIND =~ "localhost" ]]; then
+   echo -e "\n\nnetdata listen bind with localhost, it should be a public IP address"
+   echo -e "Please change IP in /etc/netdata/netdata.conf"
+   echo -e "Exit..."
+   exit -1
+fi
+
+#启动服务
+systemctl restart netdata
+
+#设置开机自动启动
+systemctl enable netdata
+
 
 # 1. 安装shadowsocks
     git clone https://github.com/teddysun/shadowsocks_install.git
@@ -15,6 +35,7 @@ chsh -s /usr/bin/fish
     ./shadowsocks-all.sh
     #选择安装shadowsocks-libev
     #端口输入80, 其他冷门端口可能被vultr或防火墙拦截
+    #加密算法选择xchacha20-ietf-poly1305
     #开启simple-obfs, 选择http类型或者tls类型
     cd ../
 
