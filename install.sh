@@ -1,8 +1,11 @@
-#/bin/bash
+#/usr/bin/fish
 yum -y install fish
 yum -y install unzip
 yum -y install git
 yum -y install netdata
+
+切换当前用户默认Shell
+chsh -s /usr/bin/fish
 
 # 1. 安装shadowsocks
     git clone https://github.com/teddysun/shadowsocks_install.git
