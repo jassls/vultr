@@ -1,9 +1,16 @@
 #!/usr/bin/bash
+
+#关闭防火墙
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+
+#安装软件包
 yum -y install fish
 yum -y install vim
 yum -y install unzip
 yum -y install git
 yum -y install netdata
+
 
 #切换当前用户默认Shell
 chsh -s /usr/bin/fish
