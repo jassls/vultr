@@ -61,6 +61,7 @@ systemctl enable netdata
     #先选0升级，再安装
     
 # 4. 配置ftp服务
+    # 开启SSL
     cd /etc/pki/tls/certs
     make vsftpd.pem
     cp -a vsftpd.pem /etc/vsftpd/
@@ -72,3 +73,4 @@ systemctl enable netdata
     echo "force_local_logins_ssl=YES" >> /etc/vsftpd/vsftpd.conf/
     echo "ssl_tlsv1=YES" >> /etc/vsftpd/vsftpd.conf/
     echo "rsa_cert_file=/etc/vsftpd/vsftpd.pem" >> /etc/vsftpd/vsftpd.conf/
+    cd ..
