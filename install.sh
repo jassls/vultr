@@ -65,12 +65,12 @@ systemctl enable netdata
     cd /etc/pki/tls/certs
     make vsftpd.pem
     cp -a vsftpd.pem /etc/vsftpd/
-    echo "ssl_enable=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "allow_anon_ssl=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "force_anon_data_ssl=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "force_anon_logins_ssl=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "force_local_data_ssl=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "force_local_logins_ssl=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "ssl_tlsv1=YES" >> /etc/vsftpd/vsftpd.conf/
-    echo "rsa_cert_file=/etc/vsftpd/vsftpd.pem" >> /etc/vsftpd/vsftpd.conf/
+    echo "ssl_enable=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "allow_anon_ssl=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "force_anon_data_ssl=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "force_anon_logins_ssl=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "force_local_data_ssl=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "force_local_logins_ssl=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "ssl_tlsv1=YES" >> /etc/vsftpd/vsftpd.conf
+    echo "rsa_cert_file=/etc/vsftpd/vsftpd.pem" >> /etc/vsftpd/vsftpd.conf
     cd ..
