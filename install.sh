@@ -57,8 +57,14 @@ systemctl enable netdata
 # 3. 安装魔改BBR
     wget -N --no-check-certificate "https://raw.githubusercontent.com/dlxg/Linux-NetSpeed/master/tcp.sh"
     chmod +x tcp.sh
+    echo "按照以下顺序输入:"
+    echo "   0. 升级脚本"
+    echo "   1. 安装 BBR/BBR魔改版内核"
+    echo "   6. 使用暴力BBR魔改版加速\(不支持部分系统\)"
+
+    read variable
+
     ./tcp.sh
-    #先选0升级，再安装
     
 # 4. 配置ftp服务
     # 开启SSL
@@ -74,3 +80,6 @@ systemctl enable netdata
     echo "ssl_tlsv1=YES" >> /etc/vsftpd/vsftpd.conf
     echo "rsa_cert_file=/etc/vsftpd/vsftpd.pem" >> /etc/vsftpd/vsftpd.conf
     cd ..
+
+
+
