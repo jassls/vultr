@@ -1,8 +1,5 @@
 #!/usr/bin/bash
 
-#关闭防火墙
-systemctl stop firewalld.service
-systemctl disable firewalld.service
 
 #安装软件包
 yum -y install fish
@@ -83,3 +80,6 @@ systemctl enable netdata
 
 
 
+#关闭防火墙
+systemctl stop firewalld.service
+systemctl disable firewalld.service
