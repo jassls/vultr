@@ -8,6 +8,7 @@ yum -y install unzip
 yum -y install git
 yum -y install netdata
 yum -y install vsftpd
+yum -y install iperf3
 
 
 #切换当前用户默认Shell
