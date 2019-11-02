@@ -10,6 +10,7 @@ tools(){
 	yum -y install netdata
 	yum -y install vsftpd
 	yum -y install iperf3
+        yum -y install psmisc 
 
 	#切换当前用户默认Shell
 	chsh -s /usr/bin/fish
@@ -20,7 +21,7 @@ tools(){
 	echo "${NETDATABIND}"
 	if [[ $NETDATABIND =~ "localhost" ]]; then
    		echo -e "\n\nnetdata listen bind with localhost, it should be a public IP address"
-   		echo -e "Please change IP in /etc/netdata/netdata.conf"
+   		echo -e "Please change domain name in /etc/netdata/netdata.conf"
    		echo -e "Exit..."
    		exit -1
 	fi
@@ -64,16 +65,20 @@ shadowsocks() {
 	#加密算法选择xchacha20-ietf-poly1305
 	#开启simple-obfs, 选择http类型或者tls类型
 	cd ../
+        systemctl enable shadowsocks-libev
 }
 
 aria2(){
 	echo "Start install aria2"
+	systemctl start firewalld.service
+
 	# 2. 安装aria2ng
 	git clone https://github.com/helloxz/ccaa.git
 	chmod 777 ./ccaa/ccaa.sh
 	cd ccaa
 	./ccaa.sh
 	cd ../
+	systemctl stop firewalld.service
 }
 
 bbr(){
@@ -91,9 +96,25 @@ bbr(){
 	./tcp.sh
 }
 
+restartallservice() {
+        # 重启Shadowsocks
+        systemctl restart shadowsocks-libev
+
+        #重启aria2
+        killall -9 aria2c
+	nohup aria2c --conf-path=/etc/ccaa/aria2.conf &	
+
+        #重启netdata
+	systemctl restart netdata
+}
+
+bye() {
+	exit 0
+}
+
 echo "Please select your function"
 
-menu="tools shadowsocks aria2 bbr"
+menu="tools shadowsocks aria2 bbr restartallservice bye"
 
 select menu in $menu:
 do 
@@ -106,7 +127,11 @@ do
     ;;
     4) bbr
     ;;
-    *) echo "please choose 1-4"
+    5) restartallservice
+    ;;
+    6) bye
+    ;;
+    *) echo "please choose 1-6"
     ;;
     esac
 done
