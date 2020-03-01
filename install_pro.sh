@@ -84,15 +84,16 @@ aria2(){
 bbr(){
 	echo "Start install BBR"
 	# 3. 安装魔改BBR
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/dlxg/Linux-NetSpeed/master/tcp.sh"
-	chmod +x tcp.sh
-	echo "按照以下顺序输入:"
-	echo "   0. 升级脚本"
-	echo "   1. 安装 BBR/BBR魔改版内核"
-	echo "   6. 使用暴力BBR魔改版加速\(不支持部分系统\)"
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
+	echo "按照以下顺序执行:(注意, 只用BBRplus即可，效果最好。(也不要用锐速，多倍发包)"
+	echo "   升级脚本"
+	echo "   内核管理选择: 安装 BBRplus版内核"
+	echo "   加速管理选择: 使用BBRplus版加速"
+	echo "   杂项管理选择: 系统配置优化"
 
 	read variable
 
+	chmod +x tcp.sh
 	./tcp.sh
 }
 
