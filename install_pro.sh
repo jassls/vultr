@@ -58,12 +58,15 @@ shadowsocks() {
 	git clone https://github.com/teddysun/shadowsocks_install.git
 	cd shadowsocks_install/
 	git checkout -b master origin/master
+        echo "操作步骤:"
+	echo "    1. 选择安装shadowsocks-libev"
+	echo "    2. 端口输入80, 其他冷门端口可能被vultr或防火墙拦截"
+	echo "    3. 加密算法选择xchacha20-ietf-poly1305"
+	echo "    4. 开启simple-obfs, 选择http类型或者tls类型"
+	read variable
+
 	chmod 777 *.sh
 	./shadowsocks-all.sh
-	#选择安装shadowsocks-libev
-	#端口输入80, 其他冷门端口可能被vultr或防火墙拦截
-	#加密算法选择xchacha20-ietf-poly1305
-	#开启simple-obfs, 选择http类型或者tls类型
 	cd ../
         systemctl enable shadowsocks-libev
 }
@@ -86,10 +89,10 @@ bbr(){
 	# 3. 安装魔改BBR
 	wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
 	echo "按照以下顺序执行:(注意, 只用BBRplus即可，效果最好。(也不要用锐速，多倍发包)"
-	echo "   升级脚本"
-	echo "   内核管理选择: 安装 BBRplus版内核"
-	echo "   加速管理选择: 使用BBRplus版加速"
-	echo "   杂项管理选择: 系统配置优化"
+	echo "升级脚本"
+	echo "    1. 内核管理选择: 安装 BBRplus版内核"
+	echo "    2. 加速管理选择: 使用BBRplus版加速"
+	echo "    3. 杂项管理选择: 系统配置优化"
 
 	read variable
 
@@ -113,26 +116,36 @@ bye() {
 	exit 0
 }
 
+all() {
+	echo "start install everything..."
+	tools
+	shadowsocks
+	aria2
+	bbr
+}
+
 echo "Please select your function"
 
-menu="tools shadowsocks aria2 bbr restartallservice bye"
+menu="all tools shadowsocks aria2 bbr restartallservice bye"
 
 select menu in $menu:
 do 
     case $REPLY in
-    1) tools
+    1) all
     ;;
-    2) shadowsocks
+    2) tools
     ;;
-    3) aria2
+    3) shadowsocks
     ;;
-    4) bbr
+    4) aria2
     ;;
-    5) restartallservice
+    5) bbr
     ;;
-    6) bye
+    6) restartallservice
     ;;
-    *) echo "please choose 1-6"
+    7) bye
+    ;;
+    *) echo "please choose 1-7"
     ;;
     esac
 done
