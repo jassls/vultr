@@ -3,6 +3,7 @@
 tools(){
 	echo "Start install tools"
 	#安装软件包
+	yum -y install wget
 	yum -y install fish
 	yum -y install vim
 	yum -y install unzip
