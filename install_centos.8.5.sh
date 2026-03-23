@@ -14,7 +14,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # 默认配置
-SS_PORT=80
+SS_PORT=443
 SS_PASSWORD=$(openssl rand -base64 16)
 SS_METHOD="xchacha20-ietf-poly1305"
 SS_OBFS="http"
@@ -319,6 +319,12 @@ show_status() {
     echo -e "Clash配置: ${YELLOW}/var/www/clash/config.yaml${NC}"
     echo -e "重启SS:   ${YELLOW}systemctl restart shadowsocks-libev${NC}"
     echo -e "重启订阅: ${YELLOW}systemctl restart clash-subscription${NC}"
+    echo ""
+    echo -e "${YELLOW}╔════════════════════════════════════════════════════╗${NC}"
+    echo -e "${YELLOW}║  请在云控制台安全组放行以下端口:                     ║${NC}"
+    echo -e "${YELLOW}║    • ${SS_PORT}/TCP + ${SS_PORT}/UDP (SS服务端口)    ║${NC}"
+    echo -e "${YELLOW}║    • 25500/TCP (订阅服务端口)                       ║${NC}"
+    echo -e "${YELLOW}╚════════════════════════════════════════════════════╝${NC}"
     echo "============================================"
 }
 
