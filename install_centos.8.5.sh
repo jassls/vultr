@@ -220,7 +220,7 @@ log-level: info
 external-controller: 127.0.0.1:9090
 
 proxies:
-  - name: "我的SS"
+  - name: "腾讯云纯净IP_SS"
     type: ss
     server: ${PUBLIC_IP}
     port: ${SS_PORT}
@@ -232,13 +232,13 @@ proxy-groups:
   - name: "代理"
     type: select
     proxies:
-      - "我的SS"
+      - "腾讯云纯净IP_SS"
       - DIRECT
 
   - name: "自动选择"
     type: url-test
     proxies:
-      - "我的SS"
+      - "腾讯云纯净IP_SS"
     url: 'http://www.gstatic.com/generate_204'
     interval: 300
 
